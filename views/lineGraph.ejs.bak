@@ -75,4 +75,59 @@
 </body>
 </html>
 
+		<script>
+		console.log('what the f');
+		var dataSelected = 'power';
 		
+			$( ".dataSelectorRadio" ).on( "click", function() {
+
+	//		$("#selectedData").html($( "input:checked" ).val() + " is checked!" );
+						$("#lineGraphTitle").html($( ".dataSelectorRadio:checked" ).val() );
+
+			 dataSelected = $(".dataSelectorRadio:checked").val();
+		//	console.log('dataSelected item is: '+dataSelected);
+		});	
+						var dataItem;
+			var lineGraphSocket = io.connect('http://127.0.0.1:1337');
+
+			lineGraphSocket.on('connect', function (data) {
+					console.log('lineGraph client connected ');
+					console.log('lineGraph connected data ' + data);
+
+				
+			jQuery(function ($) {
+				lineGraphSocket.on('updateData', function (data) {
+			//		console.log('lineGraph update: ' + data);
+					dataItem = JSON.parse(data);
+			//		console.log('lineGraph updateData power ' + dataItem.power);
+
+					switch (dataSelected) {
+						case 'power':
+			//				console.log('graph power '+dataSelected);
+							tick( dataItem.power );
+							break;
+						case 'current':
+			//				console.log('graph current '+dataSelected);
+							tick( dataItem.current );
+							break;
+						case 'voltage':
+			//				console.log('graph voltage '+dataSelected);
+							tick( dataItem.voltage );
+							break;
+						case 'rpm':
+							var realRPM = Math.floor(((dataItem.rpm * 3.3)/1024)*1000); //*666.667);
+			//				console.log('graph rpm '+dataSelected);
+							tick( realRPM );
+							break;
+						default:
+			//				console.log('graph default');
+							tick( dataItem.power );
+					}
+				 
+				});
+			});
+		
+				});
+				
+	
+		</script>			

@@ -21,7 +21,7 @@ config.redZones = [{ from: config.min + range*0.9, to: config.max }];
 
 gauges[name] = new Gauge(name + "GaugeContainer", config);
 gauges[name].render();
-//console.log("created guage");
+console.log("created guage");
 }
 
 function createGauges()
@@ -236,7 +236,7 @@ function Gauge(placeholderName, configuration)
 									.style("stroke-width", "0px");
 		
 		this.redraw(this.config.min, 0);
-		//console.log("guage");
+		console.log("guage");
 	}
 	
 	this.buildPointerPath = function(value)

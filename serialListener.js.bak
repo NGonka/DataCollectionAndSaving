@@ -228,7 +228,7 @@ serialListener.write = function( id, value ) {
 		DIserialPort.write(value, function(err, results) {
 			console.log('DI_err ' + err);
 			console.log('DI_results ' + results);
-            
+            console.log('value: ' + value)
 		});
 	} else {
 		console.log('bad id '+id);
