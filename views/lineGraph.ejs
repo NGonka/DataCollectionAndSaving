@@ -12,6 +12,7 @@
     function drawPoints(id) {
     var pjs = Processing.getInstanceById(id);
     var json =io.connect('http://127.0.0.1:1337');
+    console.log('so far..');
     
     json.on('connect', function (data) {
 					console.log('json stuff connected ');
@@ -37,7 +38,9 @@
   	
 	<div class="lineGraphDiv"name="lineGraphDiv" id="lineGraphDiv" >
 	<h1 id=lineGraphTitle>power</h1>
-	<canvas data-processing-sources="/pde-sketch/accel_gui2.pde"></canvas>
+	<canvas id="processingSketch" data-processing-sources="/pde-sketch/accel_gui2.pde"></canvas>
+
+    
     </div>
 
 

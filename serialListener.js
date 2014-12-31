@@ -137,12 +137,15 @@ io.sockets.on('connection', function(socket){
  var chunksIn = 0;
  
     DIserialPort.on('data', function(data) {
+        console.log('in DISerialPort...............');
 		chunksIn = chunksIn+1;
         receivedData += data.toString();
 
 			var jsonOpened = receivedData.indexOf('{');
 			var jsonClosed = receivedData.indexOf('}', jsonOpened);
-
+        console.log('jsonOpen' +jsonOpened);
+        console.log('jsonClose' +jsonClosed);
+        
 		if( jsonClosed !== -1 && jsonOpened !== -1 ) {
 			if ( jsonClosed > jsonOpened ) {
 				sendData = receivedData.substring(jsonOpened, jsonClosed+1);
@@ -150,12 +153,13 @@ io.sockets.on('connection', function(socket){
 				chunksIn = 0;
 			}
 		 }
+         console.log('sendData' +sendData);
          // send the incoming data to browser with websockets.
 		if (sendData.length > 0 ) {
 			var now = new Date();
 			var formatNow = now.getDate()+"/"+(now.getMonth()+1)+"/"+now.getFullYear()+'\:'+now.getHours()+'\:'+now.getMinutes()+'\:'+now.getSeconds()+'\:'+now.getMilliseconds();
 		
-			//	console.log('SEND update data : '+sendData);
+				console.log('SEND update data : '+sendData);
 			var sendJSON = '{\n  \"date\": \"'+formatNow+'\",';
 			sendJSON += sendData.substring(1, sendData.length-3);
 			sendJSON += ",\n  \"windSpeed\": "+windSpeedValue+",\n";

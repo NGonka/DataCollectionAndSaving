@@ -3,7 +3,7 @@
 // module for setting Wind Speed of the wind fan
 //
 var DIserialListener = require('../serialListener');
-var portConfig = require('../portConfig.json');
+var portConfig = require('./portConfig.json');
 
 DIserialListener(portConfig.measurement.port);
 
