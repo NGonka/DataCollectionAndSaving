@@ -15,9 +15,9 @@
         
     }
 
-    function drawPvP(id,volt,current){
+    function drawPvP(id,PointX,PointY,labelX,labelY){
         var pjs = Processing.getInstanceById(id);
-        pjs.drawPointVsPoint(volt,current); 
+        pjs.drawPointVsPoint(PointX,PointY,labelX,labelY); 
         //console.log('PvP');
     }
     
@@ -64,9 +64,10 @@
                 
                 <div></div>
                 <span>
-                <input type="radio"  class="dataSelectorRadio" name="measuredData" id="voltCurrent" value="voltCurrent" onclick="cls('processingSketch')">
-				<label for="voltCurrent">Volt vs Current</label>
+                <input type="radio"  class="dataSelectorRadio" name="measuredData" id="PvsN" value="PvsN" onclick="cls('processingSketch')">
+				<label for="P(n)">P(n)</label>
                 </span>
+                
                 
 			<div id="selectedData"></div>
 	</form>
@@ -120,10 +121,10 @@
                             //cls(sketch_id);
 							drawPointsVsTime( sketch_id,realRPM, dataItem.timestamp );
 							break;
-                        case 'voltCurrent':
+                        case 'PvsN':
                             //cls(sketch_id);
                             
-                            drawPvP(sketch_id, dataItem.voltage,dataItem.current);
+                            drawPvP(sketch_id, dataItem.rpm,Math.abs(Math.ceil((dataItem.power)/1000)),'n [1/s]','P [mW]');
                             break;
 						default:
 			//				console.log('graph default');
