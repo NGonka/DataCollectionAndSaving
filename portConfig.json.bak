@@ -5,7 +5,7 @@
 	},
 	"measurement": {
 		"port": "COM25",
-		"baudrate": "115200"
+		"baudrate": "9600"
 	},
 	"loadController": {
 		"port": "COM8",

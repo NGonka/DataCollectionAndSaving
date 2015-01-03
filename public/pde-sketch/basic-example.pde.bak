@@ -38,7 +38,7 @@ void draw(){
   background(100);
   tint(255,255,255,250);
   image(fade,(width -rWidth )/2,(height-rHeight)/2,rWidth,rHeight);
-  filter(BLUR,0.75);
+  filter(BLUR,0.5);
   noTint();
   radius = radius + sin( frameCount / 4 );
   

@@ -137,20 +137,19 @@ io.sockets.on('connection', function(socket){
  var chunksIn = 0;
  
     DIserialPort.on('data', function(data) {
-        console.log('in DISerialPort...............');
+        
 		chunksIn = chunksIn+1;
         receivedData += data.toString();
 
 			var jsonOpened = receivedData.indexOf('{');
 			var jsonClosed = receivedData.indexOf('}', jsonOpened);
-        console.log('jsonOpen' +jsonOpened);
-        console.log('jsonClose' +jsonClosed);
         
 		if( jsonClosed !== -1 && jsonOpened !== -1 ) {
 			if ( jsonClosed > jsonOpened ) {
 				sendData = receivedData.substring(jsonOpened, jsonClosed+1);
 				receivedData = receivedData.substring(jsonClosed+2, receivedData.length);'';
 				chunksIn = 0;
+                
 			}
 		 }
          console.log('sendData' +sendData);

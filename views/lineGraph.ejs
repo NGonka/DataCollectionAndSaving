@@ -5,32 +5,27 @@
   <meta charset="utf-8">
   <title>processing graph</title>
 <link rel="stylesheet" href="../stylesheets/style.css">
-    <script type="text/javascript" src="/javascripts/processing.js"></script>
-    <script type="text/javascript" src="/javascripts/minim.js"></script>
+<script type="text/javascript" src="/javascripts/processing.js"></script>
+<script type="text/javascript" src="/javascripts/minim.js"></script>
     
-    <script type="text/javascript">
-    function drawPoints(id) {
-    var pjs = Processing.getInstanceById(id);
-    var json =io.connect('http://127.0.0.1:1337');
-    console.log('so far..');
-    
-    json.on('connect', function (data) {
-					console.log('json stuff connected ');
-					console.log('json stuff connected data ' + data);
+<script type="text/javascript">
+    function drawPointsVsTime(id, data,timestamp) {
+        var pjs = Processing.getInstanceById(id);
+        pjs.drawPointVsTime(data,timestamp);
+        
     }
-    /*
-    if(data){
-        for(p=0, end=data.length;p<end;p++){
-            var rpmPoint     = data.rpm[p];
-            var currentPoint = data.current[p];
-            var voltagePoint = data.voltage[p];
-            var timePoint    = data.timestamp[p];
-            pjs.addPoints(voltagePoint,currentPoint,rpmPoint,timePoint);        
-            }    
-        }*/
-        );
-    }    
 
+    function drawPvP(id,volt,current){
+        var pjs = Processing.getInstanceById(id);
+        pjs.drawPointVsPoint(volt,current); 
+        //console.log('PvP');
+    }
+    
+    function cls(id){
+        var pjs =Processing.getInstanceById(id);
+        pjs.clearPositions();
+    }
+    
     </script>
   </head>
 
@@ -38,8 +33,8 @@
   	
 	<div class="lineGraphDiv"name="lineGraphDiv" id="lineGraphDiv" >
 	<h1 id=lineGraphTitle>power</h1>
-	<canvas id="processingSketch" data-processing-sources="/pde-sketch/accel_gui2.pde"></canvas>
-
+	<canvas id="processingSketch" data-processing-sources="/pde-sketch/graph/graph.pde"></canvas>
+    
     
     </div>
 
@@ -49,27 +44,100 @@
 			<fieldset id="graphDataSelection">
 				<legend>Select which data to graph</legend>
 							
-
+                
 				<span>
-				<input type="radio" class="dataSelectorRadio" name="measuredData" id="current" value="current">
+				<input type="radio" class="dataSelectorRadio" name="measuredData" id="current" value="current" onclick="cls('processingSketch')">
 				<label for="current">Current</label>
 				</span>
 				<span>
-				<input type="radio"  class="dataSelectorRadio" name="measuredData" id="voltage" value="voltage">
+				<input type="radio"  class="dataSelectorRadio" name="measuredData" id="voltage" value="voltage" onclick="cls('processingSketch')">
 				<label for="voltage">Voltage</label>
 				</span>
 				<span>
-				<input type="radio"  class="dataSelectorRadio" name="measuredData" id="power" value="power" checked=true>
+				<input type="radio"  class="dataSelectorRadio" name="measuredData" id="power" value="power" checked=true  onclick="cls('processingSketch')">
 				<label for="power">Power</label>
 				</span>
 				<span>
-				<input type="radio"  class="dataSelectorRadio" name="measuredData" id="rpm" value="rpm">
+				<input type="radio"  class="dataSelectorRadio" name="measuredData" id="rpm" value="rpm"  onclick="cls('processingSketch')">
 				<label for="rpm">RPM</label>
 				</span>
+                
+                <div></div>
+                <span>
+                <input type="radio"  class="dataSelectorRadio" name="measuredData" id="voltCurrent" value="voltCurrent" onclick="cls('processingSketch')">
+				<label for="voltCurrent">Volt vs Current</label>
+                </span>
+                
 			<div id="selectedData"></div>
 	</form>
 	</fieldset>
-					
+	<script>
+		//console.log('what the f');
+        var sketch_id="processingSketch";
+		var dataSelected = 'power';
+		
+			$( ".dataSelectorRadio" ).on( "click", function() {
+
+	//		$("#selectedData").html($( "input:checked" ).val() + " is checked!" );
+						$("#lineGraphTitle").html($( ".dataSelectorRadio:checked" ).val() );
+
+			 dataSelected = $(".dataSelectorRadio:checked").val();
+		//	console.log('dataSelected item is: '+dataSelected);
+		});	
+						var dataItem;
+			var lineGraphSocket = io.connect('http://127.0.0.1:1337');
+
+			lineGraphSocket.on('connect', function (data) {
+					console.log('lineGraph client connected ');
+					console.log('lineGraph connected data ' + data);
+
+				
+			jQuery(function ($) {
+				lineGraphSocket.on('updateData', function (data) {
+			//		console.log('lineGraph update: ' + data);
+					dataItem = JSON.parse(data);
+			//		console.log('lineGraph updateData power ' + dataItem.power);
+
+					switch (dataSelected) {
+						case 'power':
+			//				console.log('graph power '+dataSelected);
+                            //cls(sketch_id);
+							drawPointsVsTime(sketch_id, Math.abs(Math.ceil((dataItem.power)/1000)), dataItem.timestamp );
+							break;
+						case 'current':
+                            //cls(sketch_id);
+			//				console.log('graph current '+dataSelected);
+							drawPointsVsTime(sketch_id, dataItem.current, dataItem.timestamp );
+							break;
+						case 'voltage':
+			//				console.log('graph voltage '+dataSelected);
+                            //cls(sketch_id);
+							drawPointsVsTime(sketch_id, dataItem.voltage, dataItem.timestamp );
+							break;
+						case 'rpm':
+							var realRPM = (dataItem.rpm); //*666.667);
+			//				console.log('graph rpm '+dataSelected);
+                            //cls(sketch_id);
+							drawPointsVsTime( sketch_id,realRPM, dataItem.timestamp );
+							break;
+                        case 'voltCurrent':
+                            //cls(sketch_id);
+                            
+                            drawPvP(sketch_id, dataItem.voltage,dataItem.current);
+                            break;
+						default:
+			//				console.log('graph default');
+                            //cls(sketch_id);
+							drawPointsVsTime(sketch_id, Math.abs(Math.ceil((dataItem.power)/1000)), dataItem.timestamp) ;
+					}
+				 
+				});
+			});
+		
+				});
+				
+	
+		</script>							
  
  
  

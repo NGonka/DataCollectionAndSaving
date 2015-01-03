@@ -15,10 +15,10 @@
    <script>
   function dataInputFunction() {
   
-	createGauge("voltage", "Voltage", "V");
-	createGauge("current", "Current", "mA");
-	createGauge("rpm", "RPM", "rpm", 0, 5000);
-	createGauge("power", "Power", "mW", 0, 120000);
+	createGauge("voltage", "Voltage", "V",0,6000);
+	createGauge("current", "Current", "mA",0,6000);
+	createGauge("rpm", "RPM", "rpm", -7000, 7000);
+	createGauge("power", "Power", "mW", -220000, 220000);
 
    
 //console.log('update nothing ');
@@ -37,11 +37,11 @@ var dataItem;
 		//			console.log('updateData current ' + dataItem.current);
 
 
-				var realRPM = Math.floor(((dataItem.rpm * 3.3)/1024)*1000); //*666.667);
+				//var realRPM = Math.floor(((dataItem.rpm * 3.3)/1024)*1000); //*666.667);
 			
 				updateGauge("current", dataItem.current);
 				updateGauge("voltage", dataItem.voltage);
-				updateGauge("rpm", realRPM);
+				updateGauge("rpm", dataItem.rpm);
 				updateGauge("power", dataItem.power);
 				 
 				});
@@ -77,7 +77,7 @@ var dataItem;
 <title><%= title %></title>
 <div class="DIstartButtonDiv">
 <form name="DIstartButton" id"startButton" class="DIstartButton" action="/dataInput" method="post"></form>
-	<span><button type="button" class="DIstartButton" id="DIstartButton" name="DIstartButton" onclick="DIstartButton('processingSketch')">Start Data</button> </span>
+	<span><button class="DIstartButton" id="DIstartButton" name="DIstartButton">Start Data</button> </span>
 </div>
 <div class="DIstopButtonDiv">
 	<form name="DIstopButton" id"stopButton" class="DIstopButton" action="/dataInput" method="post"></form>
