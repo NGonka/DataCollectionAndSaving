@@ -43,4 +43,7 @@ Icon
 .Trashes
 
 # Notepad++ backup files
-.bak
+*.bak
+
+.gitignore.bak
+*.bak
