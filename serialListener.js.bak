@@ -149,7 +149,7 @@ io.sockets.on('connection', function(socket){
 				sendData = receivedData.substring(jsonOpened, jsonClosed+1);
 				receivedData = receivedData.substring(jsonClosed+2, receivedData.length);'';
 				chunksIn = 0;
-                console.log('receivedData.length: '+receivedData.length);
+                
 			}
 		 }
          console.log('sendData' +sendData);

@@ -9,15 +9,15 @@
 <script type="text/javascript" src="/javascripts/minim.js"></script>
     
 <script type="text/javascript">
-    function drawPointsVsTime(id, data,timestamp) {
+    function drawPointsVsTime(id, data,timestamp,min,max,steps,yLabel) {
         var pjs = Processing.getInstanceById(id);
-        pjs.drawPointVsTime(data,timestamp);
+        pjs.drawPointVsTime(data,timestamp,min,max,steps,yLabel);
         
     }
 
-    function drawPvP(id,PointX,PointY,labelX,labelY){
+    function drawPvP(id,PointX,PointY,labelX,labelY,xMin,xMax,xStep,yMin,yMax,yStep){
         var pjs = Processing.getInstanceById(id);
-        pjs.drawPointVsPoint(PointX,PointY,labelX,labelY); 
+        pjs.drawPointVsPoint(PointX,PointY,labelX,labelY,xMin,xMax,xStep,yMin,yMax,yStep); 
         //console.log('PvP');
     }
     
@@ -103,33 +103,33 @@
 						case 'power':
 			//				console.log('graph power '+dataSelected);
                             //cls(sketch_id);
-							drawPointsVsTime(sketch_id, Math.abs(Math.ceil((dataItem.power)/1000)), dataItem.timestamp );
+							drawPointsVsTime(sketch_id, dataItem.power, dataItem.timestamp,0,20000,1000,'P in mW' );
 							break;
 						case 'current':
                             //cls(sketch_id);
 			//				console.log('graph current '+dataSelected);
-							drawPointsVsTime(sketch_id, dataItem.current, dataItem.timestamp );
+							drawPointsVsTime(sketch_id, dataItem.current, dataItem.timestamp,0,1500,100,'I in mA' );
 							break;
 						case 'voltage':
 			//				console.log('graph voltage '+dataSelected);
                             //cls(sketch_id);
-							drawPointsVsTime(sketch_id, dataItem.voltage, dataItem.timestamp );
+							drawPointsVsTime(sketch_id, dataItem.voltage, dataItem.timestamp,0,15000,1000,'V in mV' );
 							break;
 						case 'rpm':
 							var realRPM = (dataItem.rpm); //*666.667);
 			//				console.log('graph rpm '+dataSelected);
                             //cls(sketch_id);
-							drawPointsVsTime( sketch_id,realRPM, dataItem.timestamp );
+							drawPointsVsTime( sketch_id,realRPM, dataItem.timestamp,0,8000,500,'n in 1/min' );
 							break;
                         case 'PvsN':
                             //cls(sketch_id);
                             
-                            drawPvP(sketch_id, dataItem.rpm,Math.abs(Math.ceil((dataItem.power)/1000)),'n [s^-1]','P [mW]');
+                            drawPvP(sketch_id, dataItem.rpm,dataItem.power,'n [1/min]','P [mW]',0,8000,500,0,20000,1000);
                             break;
 						default:
 			//				console.log('graph default');
                             //cls(sketch_id);
-							drawPointsVsTime(sketch_id, Math.abs(Math.ceil((dataItem.power)/1000)), dataItem.timestamp) ;
+							drawPointsVsTime(sketch_id, dataItem.power, dataItem.timestamp,0,20000,1000,'P [mW]') ;
 					}
 				 
 				});

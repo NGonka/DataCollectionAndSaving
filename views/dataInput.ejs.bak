@@ -15,10 +15,10 @@
    <script>
   function dataInputFunction() {
   
-	createGauge("voltage", "Voltage", "V",0,6000);
-	createGauge("current", "Current", "mA",0,6000);
-	createGauge("rpm", "RPM", "rpm", -7000, 7000);
-	createGauge("power", "Power", "mW", -220000, 220000);
+	createGauge("voltage", "Voltage", "V",0,15000);
+	createGauge("current", "Current", "mA",0,1300);
+	createGauge("rpm", "RPM", "rpm", 0, 8000);
+	createGauge("power", "Power", "mW", 0, 2000);
 
    
 //console.log('update nothing ');

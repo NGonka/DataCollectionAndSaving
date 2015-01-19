@@ -2,33 +2,43 @@
 
 
 PFont font;
-PImage grid;
+
+//PImage grid;
 
 int numValues = 1;    // number of input values or sensors
 
 int[] values   = new int[numValues];
-int[]   min      = new int[numValues];
-int[]   max      = new int[numValues];
+
 color[] valColor = new color[3];
-float[] oldY = new float[numValues];
-int oldX =0; 
+float oldY;
+float oldX =0; 
 int[] maxValue = new int[numValues];
 int[] minValue = new int[numValues];
 
-float partH;          // partial screen height
+//float partH;          // partial screen height
+
+int steps;
 
 
-int minimum = -6000;
-int maximum = 6000;
-
-int xPos = 0;
-int yPos = 0;
+float xPos = 0;
+float yPos = 0;
 String inString="";
 boolean clear = false;
 boolean startPvT=true;
 boolean startPvP=true;
 
+int axisCounter = 0;
 
+int minimum;
+int maximum;
+
+int xStart;
+int yStart;
+int yEnd;
+int xEnd;
+String yLabel_PvT;
+float timestamp_genau=0;
+float timestamp_rnd=0;
 
 
 void setup(){
@@ -36,24 +46,28 @@ void setup(){
     size(700,300,JAVA2D);
     font = createFont("Arial Bold",12);
     textFont(font);
+
     emptyPeakArray();
-    partH = (height*1)/ numValues;
-     
+    //partH = (height*1)/ numValues;
+    yPos=height;
+    
+    //Axis size definitions
+    xStart=50;
+    yStart=100;
+    yEnd= height-15;
+    xEnd= width-xStart;
+    oldX=xStart;
+    
     values[0] = 0;
-    min[0] = minimum;
-    max[0] = maximum;  // 8-bit (0-255) example
+    
     valColor[0] = color(255, 0, 0); // red
     valColor[1] = color(0, 255, 0); // green
     valColor[2] = color(0, 0, 255); // blue
     //println(width);
     //println(height);
     background(0,0,0,0);
-    
-    for (int i=0;i<numValues;i++)
-  {
-      oldY[0]=partH*(i+1)/2;
-  }
 }
+
 
 void draw(){
     //background(0);
@@ -61,9 +75,16 @@ void draw(){
 
 }
 
-void drawPointVsTime(int Point,int timePoint){
+void drawPointVsTime(int Point,int timePoint,int xMin , int xMax, int xStep, String yLabel){
+    yLabel_PvT=yLabel;
+    //steps = step;
+    // minimum=xMin;
+    // maximum=xMax;
+    int yMax=60;
+    int yMin=0;
+    int yStep=5;
     if(startPvT){
-        drawPvTdivLines();
+        drawPvTdivLines(xMin,xMax,xStep, yMin,yMax,yStep);
         startPvT=false;
     }
 
@@ -82,19 +103,19 @@ void drawPointVsTime(int Point,int timePoint){
     // if the array has at least the # of elements as your # of sensors, you know
     // you got the whole data packet.  Map the numbers and put into the variables:
     if (values.length >= numValues) {
-      for (int i=0; i<1 ; i++) {
+      
         //values[i] = float(valuesTemp[i]);
         //print(i + ": " + values[i]);
         // print values:
         //println(values[numValues]);
         //Peak detection
-        if(values[i]>maxValue[i])
+        if(values[0]>maxValue[0])
         {
-        maxValue[i]=values[i];
+        maxValue[0]=values[0];
         }
-        if(values[i]<minValue[i])
+        if(values[0]<minValue[0])
         {
-        minValue[i]=values[i];
+        minValue[0]=values[0];
         }
         
 
@@ -105,11 +126,11 @@ void drawPointVsTime(int Point,int timePoint){
         //noStroke();
         stroke(255,0,0);
         strokeWeight(1);
-        rect(width-200, partH*i+1, 200, 24);
+        rect(width-200, 1, 200, 24);
         fill(255);
-        text(int(values[i]), width-200+10, partH*i+6+12);
+        text(int(values[0]), width-200+10, 6+12);
         fill(128);
-        text(minValue[i]+", "+maxValue[i], width-200+80, partH*i+6+12);
+        text(minValue[0]+", "+maxValue[0], width-200+80, 6+12);
         
 
         /*
@@ -119,26 +140,34 @@ void drawPointVsTime(int Point,int timePoint){
         recording = true;
         }*/
         // map to the range of partial screen height:
-        float mappedVal = map(values[i], min[i], max[i], 0, partH);
-
+        float mappedVal = map(values[0], xMin, xMax, 0, yEnd);
+        
  
         // draw lines:
         stroke(valColor[0]);
         strokeWeight(1);
         if(!clear){
-        xPos=int(oldX)+int(ceil(values[numValues]/1000));
-        
-        line(oldX, oldY[i], xPos, partH*(i+1) - mappedVal);
+        //xPos=int(oldX)+int(ceil(values[1]/1000));
+        timestamp_genau+=(values[1]/1000000);
+        timestamp_rnd+=(values[1]/1000000);
+        float mappedValY = map(timestamp_genau,yMin,yMax,0,xEnd);
+        //xPos=int(oldX)+int(ceil(timestamp_genau));
+        // xPos=int(oldX)+mappedValY;
+        xPos=mappedValY+xStart;
+        line(oldX, oldY, xPos, yEnd - mappedVal);
 
-        oldY[i] = partH*(i+1) - mappedVal;
+        oldY = yEnd - mappedVal;
         }
         else{
             background(0,0,0,0);
-            xPos=0;
-            oldY[i]=partH*(i+1)/2;
+            xPos=xStart;
+            oldY=yEnd;
             clear=false;
+            axisCounter = 0; 
             emptyPeakArray();
-            drawPvTdivLines();
+            drawPvTdivLines(xMin,xMax,xStep, yMin,yMax,yStep);
+            timestamp_genau=0;
+            timestamp_rnd=0;
                 
         }
         
@@ -147,7 +176,7 @@ void drawPointVsTime(int Point,int timePoint){
         //println("\t"+mappedVal);   // <- uncomment this to debug values
         
        
-      }
+      
       /*
        //println(str(values[values.length-1]));
       if(Save)
@@ -164,11 +193,12 @@ void drawPointVsTime(int Point,int timePoint){
         //noLoop();
         
         xPos = 0;
-        oldX=0;
+        oldX=xStart;
         // two options for erasing screen, i like the translucent option to see "history"
         background(0,0,0,0);
         emptyPeakArray();
-        drawPvTdivLines();
+        drawPvTdivLines(xMin,xMax,xStep, yMin,yMax,yStep);
+        timestamp_genau=0;
       }
       else {
         oldX = xPos;
@@ -180,29 +210,32 @@ void drawPointVsTime(int Point,int timePoint){
     }
     
   }
+  /*
+    //
+    println("T_ceil: " + ceil(timestamp_genau));
+    println("xPos: " + xPos);
+    println("T_genau: " + timestamp_genau);
+    
+    
+    println("T in usec: " + timestamp_rnd);
+    println("AxisCounter: " + axisCounter);
+    */
+    
     
 }
 
 
 
-void drawPointVsPoint(int PointX, int PointY, String labelX ,String labelY){    
+void drawPointVsPoint(int PointX, int PointY, String labelX ,String labelY,int Xmin , int Xmax, int Xstep,int Ymin , int Ymax, int Ystep){    
     if(startPvP||clear){
-        drawPvPdivLines();
+        drawPvPdivLines( Xmin ,  Xmax,  Xstep, Ymin ,  Ymax,  Ystep,labelX,labelY);
         startPvP=false;
         clear=false;
+        axisCounter = 0;
     }
     inString = PointX+","+PointY;
-    if (inString != null) {
-    // trim off any whitespace:
-    inString = trim(inString);
- 
-    // split the string on the delimiters and convert the resulting substrings into an float array:
-    //int[] valuesTemp = int(splitTokens(inString, ", \t"));
-    values = int(splitTokens(inString, ", \t"));    // delimiter can be comma space or tab
-    //println("inString: ",inString);
-    //println(values);
-    // if the array has at least the # of elements as your # of sensors, you know
-    // you got the whole data packet.  Map the numbers and put into the variables:
+        xPos=xStart+map(PointX,Xmin,Xmax, 0, xEnd);  
+        yPos=yEnd-map(PointY,Ymin,Ymax,0,yEnd);
     
         //little Textbox upper left corner
         textAlign(LEFT);
@@ -217,8 +250,8 @@ void drawPointVsPoint(int PointX, int PointY, String labelX ,String labelY){
         text (labelY+": " + PointY,width-200+105,6+12);
         //text(PointY,width-200+140,6+12 );
         //text ("mA",width-200+175,6+12);
-        xPos=values[0];    
-        yPos=height-values[1];
+        //
+        
 
 
         if (xPos >= width) {
@@ -243,7 +276,7 @@ void drawPointVsPoint(int PointX, int PointY, String labelX ,String labelY){
 
             
 
-    }
+    
 
 
 }
@@ -260,75 +293,114 @@ void emptyPeakArray(){
 void clearPositions(){
     background(0,0,0,0);
     clear =true;
-
+    
 }
 
 
-void drawMarkers(int length, char orientation, int midPointX,int midPointY){
-    int[] grid = new int[length/100];
-    for (int i=1; i<= length/50;i++){
-        grid[i-1]=i*50;     
-        
-    }
+void drawMarkers(int length, char orientation, int midPointX,int midPointY, int counter, int xMinAxisRange, int xMaxAxisRange, int Xstep, int yMinAxisRange, int yMaxAxisRange, int Ystep, String labX,String labY){
+    
+    
+    
+
+    
     if (orientation=='y'){
+        int[] yAxisRange = new int[length/Ystep];
+        for (int i=1; i<= ((yMaxAxisRange-yMinAxisRange)/Ystep)+1;i++){
+            yAxisRange[i-1]=yMinAxisRange+(i-1)*Ystep;
+        }
         stroke (0);
         strokeWeight (1);
-        textAlign(LEFT);
-        float normalY;        
-        for (int i=0; i<grid.length; i++) {
-            normalY = partH-(grid[i]);
-            line (midPointX, normalY, midPointX+10, normalY);
-            fill (0);
-            text (int(grid[i]), midPointX+10, normalY+6);
+        textAlign(RIGHT);
+        float normalY; 
+        //println("yAxisRange: " +yAxisRange.length);
+        int z;
+        for (int i=0; i<yAxisRange.length-1; i++) {
+            z=i;
+            normalY = length-(length/(yAxisRange.length-1))*i;
+            //println(normalY);
+            line (midPointX, normalY, midPointX-3, normalY);
+            fill (0);            
+            text (int(yAxisRange[i]), midPointX-6, normalY+6);
         }
+        
+        textFont(font,8);
+        text (labY, midPointX-2, length-(length/(yAxisRange.length-1))*(z+1)+6);
+        textFont(font,12);
     }
     else if( orientation=='x'){
+        int[] xAxisRange = new int[0];
+        for (int i=1; i<= ((xMaxAxisRange-xMinAxisRange)/Xstep)+1;i++){
+            xAxisRange[i-1]=xMinAxisRange+(i-1)*Xstep;    
+        }
         stroke (0);
         
         textAlign(CENTER);
-        float normalX;        
-        for (int i=0; i<grid.length; i++) {
-            normalX = grid[i];
+        float normalX;    
+        int z;
+        for (int i=0; i<xAxisRange.length-1; i++) {
+            z=i;
+            normalX = (length/(xAxisRange.length-1))*i+xStart;
             strokeWeight (1);
-            line (normalX,midPointY,normalX,midPointY-10);
+            line (normalX,midPointY-12,normalX,midPointY-15);
             fill (0);
             strokeWeight (0.1);
-            text (int(grid[i]),  normalX, midPointY-12);
+            text (int(xAxisRange[i])+(counter*(xMaxAxisRange-xMinAxisRange)),  normalX, midPointY);
         }
+        
+        textAlign(RIGHT);
+        textFont(font,10);
+        text (labX,  (length/(xAxisRange.length-1))*(z+1)+xStart, midPointY);
+        textFont(font,12);
     }
-
+        /*
+    println(length);
+    println(orientation);
+    println(midPointX);
+    println(midPointY);
+    println(counter); 
+    println("or: "+String(orientation));
+    println(xAxisRange);
+    println(yAxisRange);
+    println("XStep Marker:"+Xstep);
+    println("YStep Marker:"+Ystep);
+    //println(yAxisRange);
+*/
 }
 
 
-void drawPvTdivLines(){
+void drawPvTdivLines(int xMin,int xMax,int xStep, int yMin, int yMax, int yStep){
     // draw dividing lines:
     // vertical
+    
+    
     strokeWeight(1);
     stroke(0);
-    line(0, 0, 0, height);
+    line(xStart, 0, xStart, yEnd);
     // horizontal
     stroke(0);
     strokeWeight(1);
-    line(0,height/2,width,height/2);
+    line(xStart,yEnd,width,yEnd);
     
-    drawMarkers(width, 'x',height,height/2 );
-    drawMarkers(height,'y',0,height/2);
+    drawMarkers(xEnd, 'x',height,height,axisCounter++,yMin,yMax,yStep,xMin,xMax,xStep,"s [uSec]",yLabel_PvT);
+    drawMarkers(yEnd,'y',xStart,yEnd,0,yMin,yMax,yStep,xMin,xMax,xStep,"s [uSec]",yLabel_PvT);
     
     
 }
 
-void drawPvPdivLines(){
+void drawPvPdivLines(int Xmin , int Xmax, int Xstep,int Ymin , int Ymax, int Ystep, String labX,String labY){
     // draw dividing lines:
     // vertical
-
+    //println("XStep:"+Xstep);
+    //println(splitTokens(labX," ")[0]);
     strokeWeight(0.5);
     stroke(0);
-    line(0, 0, 0, height);
+    line(xStart, 0, xStart, yEnd);
     // horizontal
     stroke(0);
-    line(0,height,width, height);
-    drawMarkers(width, 'x',height,height );
-    drawMarkers(height,'y',0,0);
+    line(xStart,yEnd,width,yEnd);
+    
+    drawMarkers(xEnd, 'x',height,height,0,Xmin,Xmax,Xstep,0,0 ,0 ,splitTokens(labX," ")[0],splitTokens(labY," ")[0] );
+    drawMarkers(yEnd,'y',xStart,yEnd,0,0,0,0,Ymin,Ymax,Ystep,splitTokens(labX," ")[0],splitTokens(labY," ")[0]);
     
 }
 
