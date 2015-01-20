@@ -48,3 +48,4 @@ Icon
 .gitignore.bak
 *.bak
 *.bak
+portConfig.json
