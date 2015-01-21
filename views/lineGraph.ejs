@@ -103,33 +103,33 @@
 						case 'power':
 			//				console.log('graph power '+dataSelected);
                             //cls(sketch_id);
-							drawPointsVsTime(sketch_id, dataItem.power, dataItem.timestamp,0,20000,1000,'P [mW]' );
+							drawPointsVsTime(sketch_id, dataItem.power, dataItem.timestamp,0,3000,250,'P [mW]' );
 							break;
 						case 'current':
                             //cls(sketch_id);
 			//				console.log('graph current '+dataSelected);
-							drawPointsVsTime(sketch_id, dataItem.current, dataItem.timestamp,0,1500,100,'I in mA' );
+							drawPointsVsTime(sketch_id, dataItem.current, dataItem.timestamp,0,1500,100,'I [mA]' );
 							break;
 						case 'voltage':
 			//				console.log('graph voltage '+dataSelected);
                             //cls(sketch_id);
-							drawPointsVsTime(sketch_id, dataItem.voltage, dataItem.timestamp,0,15000,1000,'V in mV' );
+							drawPointsVsTime(sketch_id, dataItem.voltage, dataItem.timestamp,0,15000,1000,'V [mV]' );
 							break;
 						case 'rpm':
 							var realRPM = (dataItem.rpm); //*666.667);
 			//				console.log('graph rpm '+dataSelected);
                             //cls(sketch_id);
-							drawPointsVsTime( sketch_id,realRPM, dataItem.timestamp,0,8000,500,'n in 1/min' );
+							drawPointsVsTime( sketch_id,realRPM, dataItem.timestamp,0,8000,500,'n [1/min]' );
 							break;
                         case 'PvsN':
                             //cls(sketch_id);
                             
-                            drawPvP(sketch_id, dataItem.rpm,dataItem.power,'n [1/min]','P [mW]',0,8000,500,0,20000,1000);
+                            drawPvP(sketch_id, dataItem.rpm,dataItem.power,'n [1/min]','P [mW]',0,7500,500,0,3000,250);
                             break;
 						default:
 			//				console.log('graph default');
                             //cls(sketch_id);
-							drawPointsVsTime(sketch_id, dataItem.power, dataItem.timestamp,0,20000,1000,'P [mW]') ;
+							drawPointsVsTime(sketch_id, dataItem.power, dataItem.timestamp,0,3000,250,'P [mW]') ;
 					}
 				 
 				});

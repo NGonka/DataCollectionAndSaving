@@ -39,7 +39,9 @@ int xEnd;
 String yLabel_PvT;
 float timestamp_genau=0;
 float timestamp_rnd=0;
+long last_timestamp=0;
 
+int z;
 
 void setup(){
     
@@ -77,14 +79,16 @@ void draw(){
 
 void drawPointVsTime(int Point,int timePoint,int xMin , int xMax, int xStep, String yLabel){
     yLabel_PvT=yLabel;
+	//println("TimePoint: " + timePoint);
     //steps = step;
-    // minimum=xMin;
-    // maximum=xMax;
+    // minimum=yMin;
+    // maximum=yMax;
     int yMax=60;
     int yMin=0;
     int yStep=5;
     if(startPvT){
         drawPvTdivLines(xMin,xMax,xStep, yMin,yMax,yStep);
+		last_timestamp=timePoint;
         startPvT=false;
     }
 
@@ -140,7 +144,7 @@ void drawPointVsTime(int Point,int timePoint,int xMin , int xMax, int xStep, Str
         recording = true;
         }*/
         // map to the range of partial screen height:
-        float mappedVal = map(values[0], xMin, xMax, 0, yEnd);
+        float mappedValY = map(values[0], xMin, xMax, 0, yEnd);
         
  
         // draw lines:
@@ -148,15 +152,22 @@ void drawPointVsTime(int Point,int timePoint,int xMin , int xMax, int xStep, Str
         strokeWeight(1);
         if(!clear){
         //xPos=int(oldX)+int(ceil(values[1]/1000));
-        timestamp_genau+=(values[1]/1000000);
-        timestamp_rnd+=(values[1]/1000000);
-        float mappedValY = map(timestamp_genau,yMin,yMax,0,xEnd);
+		float deltaTime=timePoint-last_timestamp;
+		
+        timestamp_genau+=(deltaTime/1000000);
+        //timestamp_rnd+=(values[1]/1000000);
+        float mappedValX = map(timestamp_genau,yMin,yMax,0,xEnd);
         //xPos=int(oldX)+int(ceil(timestamp_genau));
-        // xPos=int(oldX)+mappedValY;
-        xPos=mappedValY+xStart;
-        line(oldX, oldY, xPos, yEnd - mappedVal);
-
-        oldY = yEnd - mappedVal;
+        // xPos=int(oldX)+mappedValX;
+        xPos=mappedValX+xStart;
+        line(oldX, oldY, xPos, yEnd - mappedValY);
+        oldY = yEnd - mappedValY;
+		/*
+		println("DeltaT: " + deltaTime);
+		println("timestamp_genau: " + timestamp_genau);
+		println("xPos: " + xPos);
+		*/
+		last_timestamp= timePoint;
         }
         else{
             background(0,0,0,0);
@@ -168,12 +179,13 @@ void drawPointVsTime(int Point,int timePoint,int xMin , int xMax, int xStep, Str
             drawPvTdivLines(xMin,xMax,xStep, yMin,yMax,yStep);
             timestamp_genau=0;
             timestamp_rnd=0;
+			last_timestamp= timePoint;
                 
         }
         
 
         
-        //println("\t"+mappedVal);   // <- uncomment this to debug values
+        //println("\t"+mappedValY);   // <- uncomment this to debug values
         
        
       
@@ -199,6 +211,7 @@ void drawPointVsTime(int Point,int timePoint,int xMin , int xMax, int xStep, Str
         emptyPeakArray();
         drawPvTdivLines(xMin,xMax,xStep, yMin,yMax,yStep);
         timestamp_genau=0;
+		last_timestamp= timePoint;
       }
       else {
         oldX = xPos;
@@ -313,7 +326,7 @@ void drawMarkers(int length, char orientation, int midPointX,int midPointY, int 
         textAlign(RIGHT);
         float normalY; 
         //println("yAxisRange: " +yAxisRange.length);
-        int z;
+        
         for (int i=0; i<yAxisRange.length-1; i++) {
             z=i;
             normalY = length-(length/(yAxisRange.length-1))*i;
@@ -336,7 +349,7 @@ void drawMarkers(int length, char orientation, int midPointX,int midPointY, int 
         
         textAlign(CENTER);
         float normalX;    
-        int z;
+        
         for (int i=0; i<xAxisRange.length-1; i++) {
             z=i;
             normalX = (length/(xAxisRange.length-1))*i+xStart;
