@@ -152,13 +152,13 @@ io.sockets.on('connection', function(socket){
                 
 			}
 		 }
-         console.log('sendData' +sendData);
+         //console.log('sendData' +sendData);
          // send the incoming data to browser with websockets.
 		if (sendData.length > 0 ) {
 			var now = new Date();
 			var formatNow = now.getDate()+"/"+(now.getMonth()+1)+"/"+now.getFullYear()+'\:'+now.getHours()+'\:'+now.getMinutes()+'\:'+now.getSeconds()+'\:'+now.getMilliseconds();
 		
-				console.log('SEND update data : '+sendData);
+			//	console.log('SEND update data : '+sendData);
 			var sendJSON = '{\n  \"date\": \"'+formatNow+'\",';
 			sendJSON += sendData.substring(1, sendData.length-3);
 			sendJSON += ",\n  \"windSpeed\": "+windSpeedValue+",\n";
@@ -166,7 +166,7 @@ io.sockets.on('connection', function(socket){
 			sendJSON += "  \"dummyLoad\": "+dummyLoadValue+"\n";
 			sendJSON += "}";
 			
-			console.log( "serialListener send JSON : \n"+sendJSON);	
+			//console.log( "serialListener send JSON : \n"+sendJSON);	
 
 			io.emit('updateData', sendJSON);
 

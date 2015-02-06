@@ -1,5 +1,5 @@
 body {
-	background-image: url('../images/Background_big.png');
+	background-image: url('../images/20141203_Background_1920x1080.png');
 	background-repeat: no-repeat;
 	background-size: 100%, 100%;
   padding: 50px;
@@ -16,6 +16,17 @@ bodyDiv {
 a {
   color: #00B7FF;
 }
+
+ /* settings for infoFrame */
+	#infoFrame {
+		position: absolute;
+		left: 900px; top: 150px;
+		width: 1000px;
+		height: 250px;
+	}
+
+
+
 
 /*
 	Settings for Wind Speed
@@ -209,8 +220,8 @@ svg {
 	}
 	.lineGraphDiv {
 		position: absolute;
-		left: 1000px;
-		top: 450px;
+		left: 1100px;
+		top: 350px;
 		width: 700px;
 		height: 300px;
 	}
@@ -228,4 +239,193 @@ svg {
 			position: absolute;
 			left: 1650px; top: 900px;
 		}
+
+
+
+/*
+on/off switch test
+*/
+
+
+    .onoffswitch {
+    position: absolute; 
+    left:350px; top:980px;
+    width: 100px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    }
+    .onoffswitch-checkbox {
+    display: none;
+    }
+    .onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 1px solid #999999; border-radius: 20px;
+    }
+    .onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.1s ease-in 0s;
+    -o-transition: margin 0.1s ease-in 0s; transition: margin 0.1s ease-in 0s;
+    }
+    .onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    }
+    .onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #EEEEEE; color: #000000;
+    }
+    .onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+    }
+    .onoffswitch-switch {
+    display: block; width: 40px; margin: -5px;
+    background: #D91515;
+    border: 3px solid #999999; border-radius: 20px;
+    position: absolute; top: 0; bottom: 0; right: 56px;
+    -moz-transition: all 0.1s ease-in 0s; -webkit-transition: all 0.1s ease-in 0s;
+    -o-transition: all 0.1s ease-in 0s; transition: all 0.1s ease-in 0s;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+    background-color: #2FCA27;
+    }
+
+
+.checkbox.custom {
+position: absolute; 
+    left:50px; top:980px;
+}
+
+.checkbox.custom2 {
+position: absolute; 
+    left:640px; top:980px;
+}
+.checkbox.custom3 {
+position: absolute; 
+    left:1075px; top:980px;
+}
+
+input[type="checkbox"].custom{
+  margin-left: 0;
+  padding:0;
+  
+}
+
+input[type="checkbox"].custom2{
+  margin-left: 0;
+  padding:0;  
+}
+
+input[type="checkbox"].custom3{
+  margin-left: 0;
+  padding:0;  
+}
+
+
+input[type="checkbox"].css-checkbox{
+  position:absolute;
+  overflow:hidden;
+  height:0px;
+  width:0px;
+  margin:-1px;
+  padding:0px;
+  border:0;
+}
+input[type="checkbox"].css-checkbox2{
+  position:absolute;
+  overflow:hidden;
+  height:0px;
+  width:0px;
+  margin:-1px;
+  padding:0px;
+  border:0;
+}
+
+input[type="checkbox"].css-checkbox3{
+  position:absolute;
+  overflow:hidden;
+  height:0px;
+  width:0px;
+  margin:-1px;
+  padding:0px;
+  border:0;
+}
+
+
+input[type=checkbox].css-checkbox+label.css-switchtest1{
+  height:52px;
+  width:120px;
+  display:inline-block;
+   background-repeat:no-repeat;
+   background-size:100%;
+  background-position:0 0;
+  font-size:13px;
+  vertical-align:middle;
+  cursor:pointer;
+  opacity:1;
+}
+
+input[type=checkbox].css-checkbox2+label.css-switchtest2{
+  height:52px;
+  width:120px;
+  display:inline-block;
+   background-repeat:no-repeat;
+   background-size:100%;
+  background-position:0 0;
+  font-size:13px;
+  vertical-align:middle;
+  cursor:pointer;
+  opacity:1;
+}
+
+input[type=checkbox].css-checkbox3+label.css-switchtest3{
+  height:52px;
+  width:120px;
+  display:inline-block;
+   background-repeat:no-repeat;
+   background-size:100%;
+  background-position:0 0;
+  font-size:13px;
+  vertical-align:middle;
+  cursor:pointer;
+  opacity:1;
+}
+
+
+
+input[type=checkbox].css-checkbox:checked+label.css-switchtest1{
+  background-image:url("../images/on_of-switch_frame png/0003.png");
+  
+}
+
+
+input[type=checkbox].css-checkbox2:checked+label.css-switchtest2{
+  background-image:url("../images/switch png/0003.png");
+}
+
+input[type=checkbox].css-checkbox3:checked+label.css-switchtest3{
+  background-image:url("../images/switch_bw png/0003.png");
+}
+
+.css-switchtest1{
+  background-image:url("../images/on_of-switch_frame png/0001.png");
+}
+
+.css-switchtest2{
+  background-image:url("../images/switch png/0001.png");  
+}
+
+.css-switchtest3{
+  background-image:url("../images/switch_bw png/0001.png");  
+}
+
+
+
 

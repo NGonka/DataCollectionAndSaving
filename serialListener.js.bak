@@ -146,7 +146,7 @@ io.sockets.on('connection', function(socket){
         
 		if( jsonClosed !== -1 && jsonOpened !== -1 ) {
 			if ( jsonClosed > jsonOpened ) {
-				sendData = receivedData.substring(jsonOpened, jsonClosed+1);
+				sendData = receivedData.substring(jsonOpened, jsonClosed+2);
 				receivedData = receivedData.substring(jsonClosed+2, receivedData.length);'';
 				chunksIn = 0;
                 

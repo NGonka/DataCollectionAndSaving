@@ -1,10 +1,10 @@
 {
 	"stepper": {
-		"port": "COM4",
+		"port": "COM45",
 		"baudrate": "115200"
 	},
 	"measurement": {
-		"port": "COM11",
+		"port": "COM4",
 		"baudrate": "115200"
 	},
 	"loadController": {

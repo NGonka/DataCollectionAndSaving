@@ -34,7 +34,9 @@ createGauge("test", "Power", -50, 50 );
 
 function updateGauge(key, value)
 {
-gauges[key].redraw(value);
+    
+    gauges[key].redraw(value)
+//d3.timer(gauges[key].redraw(value),10000);
 }
 
 
