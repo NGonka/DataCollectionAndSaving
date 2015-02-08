@@ -35,12 +35,12 @@ a {
 
         .awesome-button {
             display: block;
-            width: 190px;
-            height: 540px;
-            background: url("../images/20141120_190x540_160frames_windsack.png") no-repeat 0 0;
+            width: 171px;
+            height: 486px;
+            background: url("../images/20150208_171x486_160frames_windsack_small.png") no-repeat 0 0;
             margin-bottom: 1em;
 			position:absolute;
-			left:10px; top:380px;
+			left:10px; bottom: 40px;
         }
         .WScurrentValue {
 			position: absolute;
@@ -65,13 +65,13 @@ a {
 */
         .pitchAngle-button {
             display: block;
-            width: 280px;
-            height: 540px;
-            background: url("../images/Pitch_final.png") no-repeat 0 0;
+            width: 252px;
+            height: 486px;
+            background: url("../Images/20150208_Pitch_final_small_252x486.png") no-repeat 0 0;
             margin-bottom: 1em;
            
 			position:absolute;
-			left:330px; top:315px;
+			left:330px; bottom:60px;
         }
         .PAcurrentFrame {
 			position:absolute;
@@ -115,16 +115,15 @@ a {
         .DLawesome-button {
             display: block;
 			
-            width: 294px;
-            height: 179px;
-			
-            background: url("../images/20141202_294x179_201_load.png") no-repeat 0 0;
+            width: 221px;
+            height: 134px;			
+            background: url("../images/20150208_load_small_221x134_201frames.png") no-repeat 0 0;
 						/* background-size: 100%, 100%;
 						*/
 
             margin-bottom: 1em;
 			position:absolute;
-			left:580px; top:700px;
+			left:580px; bottom:60px;
         }
 		.DLcurrentValue {
 			position:absolute;
