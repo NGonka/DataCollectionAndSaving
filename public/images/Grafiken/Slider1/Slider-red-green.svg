@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="120"
+   height="68"
+   viewBox="0 0 120 68.000001"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Slider-red-green.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="12.22"
+     inkscape:cx="60"
+     inkscape:cy="34"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false"
+     showguides="false">
+    <sodipodi:guide
+       id="guide4206"
+       orientation="68.0,0"
+       position="0.0,0" />
+    <sodipodi:guide
+       id="guide4208"
+       orientation="68.0,0"
+       position="30.0,0" />
+    <sodipodi:guide
+       id="guide4210"
+       orientation="68.0,0"
+       position="60.0,0" />
+    <sodipodi:guide
+       id="guide4212"
+       orientation="68.0,0"
+       position="90.0,0" />
+    <sodipodi:guide
+       id="guide4214"
+       orientation="68.0,0"
+       position="120.0,0" />
+    <sodipodi:guide
+       id="guide4216"
+       orientation="0,120.0"
+       position="0,0.0" />
+    <sodipodi:guide
+       id="guide4218"
+       orientation="0,120.0"
+       position="0,17.0" />
+    <sodipodi:guide
+       id="guide4220"
+       orientation="0,120.0"
+       position="0,34.0" />
+    <sodipodi:guide
+       id="guide4222"
+       orientation="0,120.0"
+       position="0,51.0" />
+    <sodipodi:guide
+       id="guide4224"
+       orientation="0,120.0"
+       position="0,68.0" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter4264">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood4266" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="out"
+         result="composite1"
+         id="feComposite4268" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="3"
+         result="blur"
+         id="feGaussianBlur4270" />
+      <feOffset
+         dx="6"
+         dy="6"
+         result="offset"
+         id="feOffset4272" />
+      <feComposite
+         in="offset"
+         in2="SourceGraphic"
+         operator="atop"
+         result="fbSourceGraphic"
+         id="feComposite4274" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix4338" />
+      <feFlood
+         id="feFlood4340"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         in="fbSourceGraphic" />
+      <feComposite
+         id="feComposite4342"
+         in2="fbSourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur4344"
+         in="composite1"
+         stdDeviation="3"
+         result="blur" />
+      <feOffset
+         id="feOffset4346"
+         dx="1.38778e-016"
+         dy="1.5625"
+         result="offset" />
+      <feComposite
+         id="feComposite4348"
+         in2="offset"
+         in="fbSourceGraphic"
+         operator="over"
+         result="composite2" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(0,-984.36214)"
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Ebene 1">
+    <path
+       id="path4249"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.2996929;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4264)"
+       d="m 90.151059,1046.3982 c 15.619501,0 28.281601,-12.6621 28.281591,-28.2816 -10e-6,-15.6195 -12.6621,-28.28156 -28.281592,-28.28156 L 30,990.08053 c -15.619483,0 -28.2815777,12.66207 -28.2815876,28.28157 -6.6e-6,15.6195 12.6620936,28.2816 28.2815876,28.2816 z"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csccscc"
+       transform="matrix(0.97004584,0,0,0.66489405,2.3272516,331.2129)" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.70094275;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path4276"
+       cx="29.532528"
+       cy="1008.3152"
+       ry="20.980368"
+       rx="21.337957" />
+  </g>
+</svg>

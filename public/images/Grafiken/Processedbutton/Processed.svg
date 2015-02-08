@@ -116,6 +116,70 @@
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
          transform="scale(0.8) translate(12.5,0)" />
     </marker>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter4626">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood4628" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4630" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="3.1"
+         result="blur"
+         id="feGaussianBlur4632" />
+      <feOffset
+         dx="1.38778e-016"
+         dy="3.1"
+         result="offset"
+         id="feOffset4634" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4636" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow"
+       id="filter4638">
+      <feFlood
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         id="feFlood4640" />
+      <feComposite
+         in="flood"
+         in2="SourceGraphic"
+         operator="in"
+         result="composite1"
+         id="feComposite4642" />
+      <feGaussianBlur
+         in="composite1"
+         stdDeviation="3.1"
+         result="blur"
+         id="feGaussianBlur4644" />
+      <feOffset
+         dx="1.38778e-016"
+         dy="3.1"
+         result="offset"
+         id="feOffset4646" />
+      <feComposite
+         in="SourceGraphic"
+         in2="offset"
+         operator="over"
+         result="composite2"
+         id="feComposite4648" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -124,9 +188,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.54"
-     inkscape:cx="75"
-     inkscape:cy="75"
+     inkscape:zoom="1"
+     inkscape:cx="77.550838"
+     inkscape:cy="138.41888"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -156,13 +220,13 @@
      id="layer1"
      transform="translate(0,-902.36216)">
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Sstart);marker-end:url(#Arrow2Send)"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Sstart);marker-end:url(#Arrow2Send);filter:url(#filter4638)"
        d="m 9.971119,910.05169 0,132.70041 131.877261,0"
        id="path5844"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;filter:url(#filter4626)"
        d="m 9.386281,1039.7268 c 6.387929,3.194 30.041044,-15.9466 29.602889,-21.8412 2.888087,-16.426 11.221386,-55.41275 26.714802,-56.85917 11.521416,-1.07561 21.297326,16.5889 30.324905,26.53427 14.780203,16.2828 38.447663,53.6101 38.447663,53.6101"
        id="path4819"
        inkscape:connector-curvature="0"

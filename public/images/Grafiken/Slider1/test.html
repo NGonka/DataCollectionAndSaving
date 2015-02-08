@@ -1,0 +1,56 @@
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en" >
+<meta charset="ISO-8859-1">
+<head>
+<title>test
+</title>
+<style type="text/css">
+.windspeed-button {
+display: inline-block;
+position: absolute;
+left:0; top:0;
+width:120px;
+vertical-align: top;
+overflow:hidden;
+}
+.windspeedSVGbutton:hover {
+fill:red
+}
+.windspeedSVGbutton {
+fill:blue
+}
+
+.onoffswitch-checkbox{
+display:none
+}
+
+
+
+input[type=checkbox].onoffswitch-checkbox:checked+ .windspeed-label .windspeedSVGbutton{
+position: absolute; top: 0; bottom: 0; right: 100px;
+    position: absolute; top: 0; bottom: 0; right: 56px;
+    -moz-transition: all 0.1s ease-in 0s; -webkit-transition: all 0.1s ease-in 0s;
+    -o-transition: all 0.1s ease-in 0s; 
+    : all 0.1s ease-in 0s;
+}
+
+
+
+</style>
+
+</head>
+<body>
+<div class="windspeed-button">
+<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+<label class="windspeed-label" for="mywindspeed">
+    <svg version="1.1" viewBox="0 0 120 68" preserveAspectRatio="xMinYMin meet" class="windspeed-svg">
+    <defs><filter id="a" color-interpolation-filters="sRGB"><feFlood flood-opacity=".498" flood-color="#000" result="flood"/><feComposite in="flood" in2="SourceGraphic" operator="out" result="composite1"/><feGaussianBlur in="composite1" stdDeviation="3" result="blur"/><feOffset dx="6" dy="6" result="offset"/><feComposite in="offset" in2="SourceGraphic" operator="atop" result="fbSourceGraphic"/><feColorMatrix result="fbSourceGraphicAlpha" in="fbSourceGraphic" values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"/><feFlood flood-opacity=".498" flood-color="#000" result="flood"/><feComposite in2="fbSourceGraphic" in="flood" operator="in" result="composite1"/><feGaussianBlur in="composite1" stdDeviation="3" result="blur"/><feOffset dy="1.563" result="offset"/><feComposite in2="offset" in="fbSourceGraphic" result="composite2"/></filter></defs><g transform="translate(0 -984.362)" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-linecap="round"><path d="M90.15 1046.398c15.62 0 28.283-12.662 28.283-28.28 0-15.62-12.662-28.283-28.282-28.283L30 990.08c-15.62 0-28.282 12.663-28.282 28.282 0 15.62 12.663 28.282 28.282 28.282z" transform="matrix(.97 0 0 .665 2.327 331.213)" stroke-width="3.3" filter="url(#a)"/><g class="windspeedSVGbutton"><ellipse cx="29.533" cy="1008.315" ry="20.98" rx="21.338" stroke-width="2.701"/></g></g>
+    </svg>
+    </label>
+</div>
+
+</body>
+
+</html>
